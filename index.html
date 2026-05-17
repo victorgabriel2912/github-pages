@@ -1,0 +1,556 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Victor Gabriel — Portfólio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --card: #16161f;
+      --accent: #c9f23d;
+      --accent2: #7c6cff;
+      --text: #eeeef2;
+      --muted: #7a7a8e;
+      --border: rgba(255,255,255,0.07);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,108,255,0.15) 0%, transparent 70%);
+      top: -100px; right: -100px;
+      pointer-events: none;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,242,61,0.08) 0%, transparent 70%);
+      bottom: 0; left: 10%;
+      pointer-events: none;
+      animation: float 10s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+
+    .hero-content { max-width: 700px; position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(201,242,61,0.1);
+      border: 1px solid rgba(201,242,61,0.25);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0f;
+    }
+
+    .btn-primary:hover {
+      background: #d4f550;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,242,61,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), var(--accent));
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── EDUCATION ── */
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent2), var(--accent), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.4rem; top: 0.4rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201,242,61,0.15);
+    }
+
+    .timeline-date {
+      font-size: 0.75rem;
+      color: var(--accent2);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline-sub { color: var(--muted); font-size: 0.9rem; }
+
+    /* ── CONTACTS ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .contact-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .contact-icon.green { background: rgba(201,242,61,0.12); }
+    .contact-icon.blue { background: rgba(10,102,194,0.15); }
+    .contact-icon.red { background: rgba(234,67,53,0.12); }
+
+    .contact-info span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .contact-info strong { font-size: 0.9rem; font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">VG<span>.</span></div>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#formacao">Formação</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-content">
+      <div class="hero-tag">✦ Portfólio Profissional</div>
+      <h1>Victor <em>Gabriel</em><br>Sousa Madeiros</h1>
+      <p>Estudante de Análise e Desenvolvimento de Sistemas (ADS), em busca de oportunidades para desenvolver habilidades e crescer profissionalmente.</p>
+      <div class="hero-btns">
+        <a href="https://www.linkedin.com/in/victor-madeiros-b014a72ba" target="_blank" class="btn btn-primary">LinkedIn →</a>
+        <a href="mailto:victor.madeiros2912@gmail.com" class="btn btn-outline">Entrar em contato</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="section-label">Quem sou eu</div>
+    <div class="section-title">Sobre Mim</div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>Olá! Me chamo <strong>Victor Gabriel Sousa Madeiros</strong> e sou estudante no primeiro semestre de <strong>Análise e Desenvolvimento de Sistemas (ADS)</strong>.</p>
+        <p>Estou dando os primeiros passos na área de tecnologia, buscando sempre aprender novas ferramentas, linguagens e boas práticas de desenvolvimento.</p>
+        <p>Sou focado, curioso e determinado a crescer profissionalmente, construindo projetos que demonstrem minha evolução como desenvolvedor.</p>
+      </div>
+      <div class="about-card">
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="stat-num">1°</div>
+            <div class="stat-label">Semestre ADS</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Git</div>
+            <div class="stat-label">Versionamento</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">Web</div>
+            <div class="stat-label">Desenvolvimento</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2026</div>
+            <div class="stat-label">Início da jornada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- FORMAÇÃO -->
+  <section id="formacao">
+    <div class="section-label">Educação & Cursos</div>
+    <div class="section-title">Formação</div>
+    <div class="timeline reveal">
+      <div class="timeline-item">
+        <div class="timeline-date">2026 — Atual</div>
+        <div class="timeline-title">Análise e Desenvolvimento de Sistemas (ADS)</div>
+        <div class="timeline-sub">Graduação em andamento · 1º Semestre</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026</div>
+        <div class="timeline-title">Git & GitHub — Versionamento de Código</div>
+        <div class="timeline-sub">Bootcamp · Criação de repositórios e boas práticas de versionamento</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">2026</div>
+        <div class="timeline-title">Desenvolvimento Web</div>
+        <div class="timeline-sub">HTML · CSS · Criação de páginas e publicação no GitHub Pages</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="section-label">Vamos conversar</div>
+    <div class="section-title">Contatos</div>
+    <div class="contact-grid reveal">
+      <a href="https://wa.me/61986781049" target="_blank" class="contact-card">
+        <div class="contact-icon green">💬</div>
+        <div class="contact-info">
+          <span>WhatsApp</span>
+          <strong>(61) 98678-1049</strong>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/victor-madeiros-b014a72ba" target="_blank" class="contact-card">
+        <div class="contact-icon blue">🔗</div>
+        <div class="contact-info">
+          <span>LinkedIn</span>
+          <strong>victor-madeiros</strong>
+        </div>
+      </a>
+      <a href="mailto:victor.madeiros2912@gmail.com" class="contact-card">
+        <div class="contact-icon red">✉️</div>
+        <div class="contact-info">
+          <span>E-mail</span>
+          <strong>victor.madeiros2912</strong>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Victor Gabriel Sousa Madeiros · Portfólio Profissional
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+
+</body>
+</html>
+index.html
+Exibindo PORTFOLIO HUB.pdf.
